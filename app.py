@@ -12,14 +12,14 @@ from dotenv import load_dotenv
 # Download NLTK data (only needed once)
 #nltk.download('punkt')
 #nltk.download('stopwords')
+nltk.data.path.append('/app/nltk_data')
+# nltk_data_path = os.path.join(os.getcwd(), "nltk_data")  # Set a local download path
+# os.makedirs(nltk_data_path, exist_ok=True)  # Create the directory if not exists
+# nltk.data.path.append(nltk_data_path)  # Add to nltk path
 
-nltk_data_path = os.path.join(os.getcwd(), "nltk_data")  # Set a local download path
-os.makedirs(nltk_data_path, exist_ok=True)  # Create the directory if not exists
-nltk.data.path.append(nltk_data_path)  # Add to nltk path
-
-# Download resources and store them locally
-nltk.download('punkt', download_dir=nltk_data_path)
-nltk.download('stopwords', download_dir=nltk_data_path)
+# # Download resources and store them locally
+# nltk.download('punkt', download_dir=nltk_data_path)
+# nltk.download('stopwords', download_dir=nltk_data_path)
 
 # Load environment variables
 load_dotenv()
