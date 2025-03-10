@@ -10,8 +10,16 @@ from groq import Groq
 from dotenv import load_dotenv
 
 # Download NLTK data (only needed once)
-nltk.download('punkt')
-nltk.download('stopwords')
+#nltk.download('punkt')
+#nltk.download('stopwords')
+
+nltk_data_path = os.path.join(os.getcwd(), "nltk_data")  # Set a local download path
+os.makedirs(nltk_data_path, exist_ok=True)  # Create the directory if not exists
+nltk.data.path.append(nltk_data_path)  # Add to nltk path
+
+# Download resources and store them locally
+nltk.download('punkt', download_dir=nltk_data_path)
+nltk.download('stopwords', download_dir=nltk_data_path)
 
 # Load environment variables
 load_dotenv()
@@ -74,7 +82,7 @@ def generate_mcqs(text, num_questions=5):
             messages=[{"role": "system", "content": "You are a helpful assistant that generates MCQs."},
                       {"role": "user", "content": prompt}],
             temperature=0.5,
-            max_tokens=1024,
+            max_tokens=4096,
             top_p=1,
             stream=False,
             stop=None,
