@@ -9,13 +9,20 @@ from nltk.corpus import stopwords
 from groq import Groq
 from dotenv import load_dotenv
 
-# Set the NLTK data path and download necessary data
-nltk_data_path = os.path.join(os.getcwd(), "nltk_data")
+# Set the NLTK data path to a writable directory
+nltk_data_path = "/tmp/nltk_data"  # Use /tmp/ for temporary storage
 os.makedirs(nltk_data_path, exist_ok=True)
 nltk.data.path.append(nltk_data_path)
 
+# Download the required NLTK data
 nltk.download('punkt', download_dir=nltk_data_path)
 nltk.download('stopwords', download_dir=nltk_data_path)
+
+# Verify that the punkt tokenizer is available
+try:
+    nltk.data.find("tokenizers/punkt")
+except LookupError:
+    nltk.download('punkt', download_dir=nltk_data_path)
 
 # Load environment variables
 load_dotenv()
